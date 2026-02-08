@@ -8,32 +8,69 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- شريط التنقل -->
+  <!-- Navbar -->
   <nav class="navbar">
     <ul class="nav-links">
       <li><a href="index.html">الرئيسية</a></li>
       <li><a href="about.html">عن الموقع</a></li>
-      <li><a href="contact.html">تواصل معنا</a></li>
+      <li><a href="contact.html" class="active">تواصل معنا</a></li>
     </ul>
   </nav>
 
-  <!-- محتوى الصفحة -->
-  <main class="container">
-    <h2>📬 تواصل معنا</h2>
-    <p>يمكنك التواصل معنا عبر أي وسيلة من الوسائل التالية.</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>📬 تواصل معنا</h1>
+    <p>يمكنك التواصل معنا عبر أي وسيلة من الوسائل التالية</p>
+  </section>
 
-    <div class="contact-links">
-      <a href="https://www.facebook.com/bahaa.zaki.2025/" target="_blank">فيسبوك: Bahaa Zaki</a>
-      <a href="https://t.me/BahaaZaki1" target="_blank">تلجرام: @BahaaZaki1</a>
-      <a href="https://wa.me/970592312617" target="_blank">واتس آب: +970592312617</a>
+  <!-- Contact Cards -->
+  <main class="container">
+    <div class="cards contact-cards">
+      <div class="card">
+        <h3>فيسبوك</h3>
+        <p>يمكنك مراسلتنا على صفحتنا الرسمية</p>
+        <a href="https://www.facebook.com/bahaa.zaki.2025/" target="_blank">🔗 الدخول من هنا</a>
+      </div>
+      <div class="card">
+        <h3>تلجرام</h3>
+        <p>تواصل معنا مباشرة عبر تلجرام</p>
+        <a href="https://t.me/BahaaZaki1" target="_blank">🔗 الدخول من هنا</a>
+      </div>
+      <div class="card">
+        <h3>واتس آب</h3>
+        <p>أرسل لنا رسالة عبر واتس آب</p>
+        <a href="https://wa.me/970592312617" target="_blank">🔗 الدخول من هنا</a>
+      </div>
     </div>
   </main>
 
-  <!-- الفوتر -->
+  <!-- Footer -->
   <footer class="footer">
     © 2026 جميع الحقوق محفوظة لـ Bahaa Fadel
   </footer>
+  <button id="toTop">
+  <svg width="20" height="20" viewBox="0 0 24 24">
+    <path d="M6 14 L12 6 L18 14" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+</button>
 
+  <script>
+    // Fade in عند تحميل الصفحة
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Fade عند الانتقال من navbar
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const url = this.href;
+        if(url !== window.location.href){
+          e.preventDefault();
+          document.body.classList.remove('loaded');
+          setTimeout(() => window.location.href = url, 500);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

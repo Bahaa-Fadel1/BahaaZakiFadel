@@ -54,6 +54,11 @@
   <footer class="footer">
     © 2026 جميع الحقوق محفوظة لـ Bahaa Fadel
   </footer>
+  <button id="toTop">
+  <svg width="20" height="20" viewBox="0 0 24 24">
+    <path d="M6 14 L12 6 L18 14" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+</button>
 
   <!-- زر العودة للأعلى -->
   <button id="toTop">⤴️</button>
@@ -61,3 +66,23 @@
   <script src="script.js"></script>
 </body>
 </html>
+<script>
+  // عند تحميل الصفحة، اعطِ fade in
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+
+  // تأثير fade عند الانتقال لصفحة جديدة من navbar
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const url = this.href;
+      if (url !== window.location.href) {
+        e.preventDefault();
+        document.body.classList.remove('loaded'); // fade out
+        setTimeout(() => {
+          window.location.href = url;
+        }, 500); // نفس مدة الانتقال في CSS
+      }
+    });
+  });
+</script>

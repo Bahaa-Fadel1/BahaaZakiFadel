@@ -20,19 +20,28 @@ const scrapeNews = async () => {
 
     $('h3.post-title').each((i, el) => {
       if (i >= 10) return; // أول 10 أخبار فقط
+
       const title = $(el).text().trim();
       const link = $(el).find('a').attr('href');
-      const date = new Date().toISOString();
+
+      // تفاصيل قصيرة: ناخذ أول فقرة أو نص بسيط داخل البوست
+      const description = $(el).parent().find('p').first().text().trim() || '';
+
+      // آخر موعد للتقديم: حاول نلقاه داخل span أو strong يحتوي كلمة "آخر موعد"
+      let deadline = $(el).parent().find('p:contains("آخر موعد")').text().trim();
+      if (!deadline) deadline = "غير محدد";
+
+      const date = new Date().toISOString(); // وقت الإضافة الحالي
 
       // منع التكرار
       if (!existingNews.find(n => n.title === title)) {
-        newNews.push({ title, link, date });
+        newNews.push({ title, link, date, deadline, description });
       }
     });
 
     const allNews = [...newNews, ...existingNews];
     fs.writeFileSync(FILE_PATH, JSON.stringify(allNews, null, 2));
-    console.log(`✅ تم تحديث الأخبار (${newNews.length} جديد`);
+    console.log(`✅ تم تحديث الأخبار (${newNews.length} جديد)`);
   } catch (err) {
     console.log('⚠️ خطأ أثناء جلب الأخبار:', err.message);
   }
