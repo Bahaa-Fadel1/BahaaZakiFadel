@@ -197,10 +197,10 @@ async function scrapeNews() {
 }
 
 // أول تشغيل
-scrapeNews();
+//scrapeNews();
 
 // تحديث كل 10 دقائق
-setInterval(scrapeNews, 10 * 60 * 1000);
+//setInterval(scrapeNews, 10 * 60 * 1000);
 
 /* ======================================
 API
